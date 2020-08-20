@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { RegisterForm } from './Form';
+import React, { useState, createContext } from 'react';
 
-const Register = () => {
+export const FormContext = createContext();
+
+export const FormProvider = (props) => {
   const[name, setName] = useState('');
   const[email, setEmail] = useState('');
   const[password, setPassword] = useState('');
@@ -31,20 +32,9 @@ const Register = () => {
     }
     e.preventDefault();
   };
-
-  const text = !button ? null : <p>Your Name <b>{name}</b>, Email <b>{email}</b> and Password <b>{password}</b> has registered successfully</p>
   return (
-    <div>
-      <RegisterForm 
-        name = {name} handleName = {handleName}
-        email = {email} handleEmail = {handleEmail}
-        password = {password} handlePassword = {handlePassword}
-        button = {button} onSubmit = {handleButton}
-      />
-      <hr></hr>
-      {text}
-    </div>
+    <FormContext.Provider value = {[name, setName]}>
+      {props.children}
+    </FormContext.Provider>
   );
 };
-
-export default Register

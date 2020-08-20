@@ -22,3 +22,6 @@ ul {
   list-style: none;
   color: black;
 }
+a:hover .navLinks {
+  color: black;
+}
